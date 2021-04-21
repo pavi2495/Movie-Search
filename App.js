@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { TextInput, View, Button } from 'react-native';
+import performQuery from './api-client';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const sayHello = async (t) =>{
+  const res = await performQuery(t);
+  alert("Movie " + t + " has " + res.Response + " " + res.totalResults);
+};
+
+
+const MovieSearch = () => {
+const [searchQuery, setSearchQuery] = useState('');
+
+return (
+<View style={{alignContent: "center", padding: 100}}>
+  <TextInput style={{color: "black"}} onChangeText={(t) => setSearchQuery(t)}></TextInput>
+<Button
+style={{}}
+  placeholder="Type here "
+  onPress={() => sayHello(searchQuery)}
+  defaultValue={searchQuery}
+  title="Search">
+  </Button>
+</View>
+);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default MovieSearch;
