@@ -20,6 +20,8 @@ const Home = ({ navigation }) => {
           title: res.Search[input]["Title"],
           poster: res.Search[input]["Poster"],
           imdbId: res.Search[input]["imdbID"],
+          year: res.Search[input]["Year"],
+          type: res.Search[input]["Type"]
         });
         uniqueImdb.push(res.Search[input]["imdbID"]);
       }
