@@ -3,7 +3,6 @@
 ## Before Run
 - Create an API key from http://www.omdbapi.com/
 - Install latest npm and nodejs.
-- 
 
 ## Run Instructions
 - cd into project folder
