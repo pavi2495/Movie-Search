@@ -2,24 +2,34 @@ import React, { useState } from "react";
 import { TextInput, View, Button, FlatList, Dimensions } from "react-native";
 import performQuery from "./api-client";
 import ListItem from "./ListItem";
+import uuid from 'react-native-uuid';
 
 const Home = ({ navigation }) => {
+  const [pageNumber, setPageNumber] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const [Data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-  const fetchResults = async (t) => {
+  const fetchResults = async (t, pageNumber, doEmptyData) => {
     if (t.length == 0) {
       return;
     }
-    setData([]);
-    const res = await performQuery(t);
+    if (pageNumber < 1) {
+      pageNumber = 1;
+    }
+    
+    const existingData = data;
+    const res = await performQuery(t, pageNumber);
+    if (res.Response != "True") {
+      return;
+    }
     var input;
-    var data = [];
+    var newData = [];
     var uniqueImdb = [];
 
     for (input = 0; input < res.Search.length; input++) {
       if (!uniqueImdb.includes(res.Search[input]["imdbID"])) {
-        data.push({
+        newData.push({
+          uuid: uuid.v4().toString(),
           title: res.Search[input]["Title"],
           poster: res.Search[input]["Poster"],
           imdbId: res.Search[input]["imdbID"],
@@ -29,7 +39,12 @@ const Home = ({ navigation }) => {
         uniqueImdb.push(res.Search[input]["imdbID"]);
       }
     }
-    setData(data);
+    if (doEmptyData) {
+      setData(newData);
+    }  else {
+      setData([...existingData, ...newData]);
+    }
+    setPageNumber(pageNumber);
   };
 
   return (
@@ -60,15 +75,15 @@ const Home = ({ navigation }) => {
       >
         <Button
           placeholder="Type here"
-          onPress={() => fetchResults(searchQuery)}
+          onPress={() => fetchResults(searchQuery, 1, true)}
           defaultValue={searchQuery}
           title="Search"
         ></Button>
       </View>
       <FlatList
         contentContainerStyle={{ paddingBottom: 120 }}
-        data={Data}
-        keyExtractor={(item) => item["imdbId"]}
+        data={data}
+        keyExtractor={(item) => item["uuid"] }
         renderItem={({ item }) => (
           <ListItem
             title={item["title"]}
@@ -80,6 +95,8 @@ const Home = ({ navigation }) => {
             }}
           />
         )}
+        onEndReached={() => fetchResults(searchQuery, pageNumber + 1, false)}
+        onEndReachedThreshold={0.5}
       />
     </View>
   );
