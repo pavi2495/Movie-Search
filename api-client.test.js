@@ -3,7 +3,8 @@ const performQuery = require("./api-client");
 test("Returns movie results for search query mask", async () => {
     const result = await performQuery("mask");
     expect(result.Response).toBe("True");
-    expect(parseInt(result.totalResults)).toBeGreaterThan(0)
+    expect(parseInt(result.totalResults)).toBeGreaterThan(0);
+    console.log(result.totalResults);
 });
 
 test("Returns no movie results for invalid search query", async () => {

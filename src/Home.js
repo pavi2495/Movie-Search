@@ -8,6 +8,9 @@ const Home = ({ navigation }) => {
   const [Data, setData] = useState([]);
 
   const fetchResults = async (t) => {
+    if (t.length == 0) {
+      return;
+    }
     setData([]);
     const res = await performQuery(t);
     var input;
@@ -51,7 +54,7 @@ const Home = ({ navigation }) => {
           marginRight: 10,
           marginTop: 10,
           borderRadius: 5,
-          backgroundColor: '#cdcdcd',
+          backgroundColor: "#cdcdcd",
           marginBottom: 10,
         }}
       >
