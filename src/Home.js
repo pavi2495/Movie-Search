@@ -21,7 +21,7 @@ const Home = ({ navigation }) => {
           poster: res.Search[input]["Poster"],
           imdbId: res.Search[input]["imdbID"],
           year: res.Search[input]["Year"],
-          type: res.Search[input]["Type"]
+          type: res.Search[input]["Type"],
         });
         uniqueImdb.push(res.Search[input]["imdbID"]);
       }
@@ -44,14 +44,23 @@ const Home = ({ navigation }) => {
         }}
         onChangeText={(value) => setSearchQuery(value)}
       ></TextInput>
-      <Button
-        style={{}}
-        placeholder="Type here"
-        onPress={() => fetchResults(searchQuery)}
-        defaultValue={searchQuery}
-        title="Search"
-      ></Button>
-
+      <View
+        style={{
+          width: Dimensions.get("screen").width - 20,
+          marginLeft: 10,
+          marginRight: 10,
+          marginTop: 10,
+          borderRadius: 5,
+        }}
+      >
+        
+        <Button
+          placeholder="Type here"
+          onPress={() => fetchResults(searchQuery)}
+          defaultValue={searchQuery}
+          title="Search"
+        ></Button>
+      </View>
       <FlatList
         data={Data}
         keyExtractor={(item) => item["imdbId"]}

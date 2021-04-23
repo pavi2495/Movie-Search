@@ -9,30 +9,68 @@ const Detail = ({ navigation }) => {
   const data = route.params.data;
 
   return (
-    <View>
+    // <View
+    //   style={{
+    //     marginLeft: 10,
+    //     marginRight: 10,
+    //   }}
+    // >
+    //   <Image
+    //     source={{ uri: data.poster }}
+    //     style={{
+    //       width: screenWidth - 20,
+    //       height: 300,
+    //       marginTop: 1,
+    //     }}
+    //   />
+    //   <View style={{ marginTop: 20 }}>
+    //     <Text style={{ fontSize: 20 }}>
+    //       Movie Title : {data.title} {"\n"}
+    //       Imdbid : {data.imdbId} {"\n"}
+    //       Year : {data.year} {"\n"}
+    //       Type: {data.type}
+    //     </Text>
+    //   </View>
+    // </View>
+    <View
+      style={{
+        flexDirection: "column",
+        width: Dimensions.get("screen").width - 20,
+        marginLeft: 10,
+        marginRight: 10,
+      }}
+    >
       <Image
         source={{ uri: data.poster }}
         style={{
           width: screenWidth - 20,
           height: 300,
           marginTop: 1,
-          marginLeft: 10,
-          marginRight: 10,
         }}
       />
-      <View
-        style={{
-          fontSize: 200,
-          height: 200,
-          marginLeft: 20,
-          marginRight: 20,
-          fontWeight: "bold",
-        }}
-      >
-        <Text>Movie Title : {data.title}</Text>
-        <Text>Imdbid : {data.imdbId}</Text>
-        <Text>Year : {data.year}</Text>
-        <Text>Type: {data.type}</Text>
+      <View style={{ flexDirection: "row", marginTop: 15 }}>
+        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>Title</Text>
+        <Text
+          style={{ flex: 1, fontSize: 20 }}
+          ellipsizeMode="tail"
+          numberOfLines={4}
+        >
+          {data.title}
+        </Text>
+      </View>
+      <View style={{ flexDirection: "row", marginTop: 15 }}>
+        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>
+          IMDB ID
+        </Text>
+        <Text style={{ flex: 1, fontSize: 20 }}>{data.imdbId}</Text>
+      </View>
+      <View style={{ flexDirection: "row", marginTop: 15 }}>
+        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>Year</Text>
+        <Text style={{ flex: 1, fontSize: 20 }}>{data.year}</Text>
+      </View>
+      <View style={{ flexDirection: "row", marginTop: 15 }}>
+        <Text style={{ flex: 1, fontSize: 20, fontWeight: "bold" }}>Type</Text>
+        <Text style={{ flex: 1, fontSize: 20 }}>{data.type}</Text>
       </View>
     </View>
   );
