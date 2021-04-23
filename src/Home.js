@@ -51,9 +51,10 @@ const Home = ({ navigation }) => {
           marginRight: 10,
           marginTop: 10,
           borderRadius: 5,
+          backgroundColor: '#cdcdcd',
+          marginBottom: 10,
         }}
       >
-        
         <Button
           placeholder="Type here"
           onPress={() => fetchResults(searchQuery)}
@@ -62,6 +63,7 @@ const Home = ({ navigation }) => {
         ></Button>
       </View>
       <FlatList
+        contentContainerStyle={{ paddingBottom: 120 }}
         data={Data}
         keyExtractor={(item) => item["imdbId"]}
         renderItem={({ item }) => (

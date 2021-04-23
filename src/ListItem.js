@@ -16,6 +16,7 @@ const ListItem = ({ uri, title, onPressItem }) => (
         height: 200,
         marginLeft: 10,
         marginRight: 10,
+        borderRadius: 10,
       }}
     />
     <View>

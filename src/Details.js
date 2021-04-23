@@ -9,29 +9,6 @@ const Detail = ({ navigation }) => {
   const data = route.params.data;
 
   return (
-    // <View
-    //   style={{
-    //     marginLeft: 10,
-    //     marginRight: 10,
-    //   }}
-    // >
-    //   <Image
-    //     source={{ uri: data.poster }}
-    //     style={{
-    //       width: screenWidth - 20,
-    //       height: 300,
-    //       marginTop: 1,
-    //     }}
-    //   />
-    //   <View style={{ marginTop: 20 }}>
-    //     <Text style={{ fontSize: 20 }}>
-    //       Movie Title : {data.title} {"\n"}
-    //       Imdbid : {data.imdbId} {"\n"}
-    //       Year : {data.year} {"\n"}
-    //       Type: {data.type}
-    //     </Text>
-    //   </View>
-    // </View>
     <View
       style={{
         flexDirection: "column",
@@ -43,7 +20,7 @@ const Detail = ({ navigation }) => {
       <Image
         source={{ uri: data.poster }}
         style={{
-          width: screenWidth - 20,
+          width: screenWidth,
           height: 300,
           marginTop: 1,
         }}
